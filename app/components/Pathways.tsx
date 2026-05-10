@@ -28,7 +28,7 @@ export function Pathways() {
     <section className="bg-cream px-14 py-40 max-md:px-6 max-md:py-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_1.3fr] gap-30 items-start max-md:grid-cols-1 max-md:gap-12">
         <div className="sticky top-30 max-md:static">
-          <div className="reveal text-gold-dark text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-gold before:mr-4">
+          <div className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4">
             For whom
           </div>
           <h2 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.3px] mb-6">
@@ -50,10 +50,10 @@ export function Pathways() {
                 onClick={onClick(p.audience)}
                 className="group w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-9 border-t border-navy/10 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
               >
-                <span className="font-serif italic text-charcoal-soft text-[16px] transition-colors duration-500 ease-smooth group-hover:text-gold">
+                <span className="font-serif-text italic text-charcoal-soft text-[16px]">
                   {p.num}
                 </span>
-                <span className="font-serif font-normal text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3] transition-colors duration-500 ease-smooth group-hover:text-gold-dark">
+                <span className="font-serif-text font-medium text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3] -tracking-[0.2px]">
                   {p.text}
                 </span>
                 <span

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, DM_Sans } from "next/font/google";
+import { DM_Serif_Display, DM_Sans, Newsreader } from "next/font/google";
 import { Agentation } from "agentation";
 import { InterfaceKit } from "interface-kit/react";
 import "./globals.css";
@@ -19,6 +19,14 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const newsreader = Newsreader({
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-serif-text-var",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Code 1 — Because your potential is always the highest priority.",
   description:
@@ -31,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSerif.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${dmSerif.variable} ${dmSans.variable} ${newsreader.variable}`}>
       <body>
         {children}
         {process.env.NODE_ENV === "development" && <Agentation />}

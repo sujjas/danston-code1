@@ -9,9 +9,7 @@ const SEGMENTS: { text: string; gold?: boolean }[] = [
   { text: "four", gold: true },
   { text: " continents, advising " },
   { text: "three", gold: true },
-  { text: " governments, building " },
-  { text: "multimillion-dollar", gold: true },
-  { text: " businesses — published in " },
+  { text: " governments, building multimillion-dollar businesses — published in " },
   { text: "two", gold: true },
   { text: " books." },
 ];
@@ -62,12 +60,12 @@ export function CredibilitySentence() {
   return (
     <section className="bg-navy text-cream px-14 py-45 overflow-hidden max-md:px-6 max-md:py-25">
       <div className="max-w-[1180px] mx-auto">
-        <div className="reveal font-sans text-gold text-[11px] tracking-[3px] uppercase mb-12">
+        <div className="reveal font-sans text-cream/55 text-[11px] tracking-[3px] uppercase mb-12 before:inline-block before:align-middle before:w-8 before:h-px before:bg-cream/30 before:mr-4">
           Track record
         </div>
         <p
           ref={ref}
-          className="font-serif text-[clamp(32px,4.4vw,64px)] leading-[1.15] tracking-[-0.4px] max-w-[1100px]"
+          className="font-serif-text font-normal text-[clamp(32px,4.4vw,64px)] leading-[1.2] tracking-[-0.4px] max-w-[1100px]"
         >
           {SEGMENTS.map((seg, i) => {
             // Spread the reveal across roughly the middle of the section's

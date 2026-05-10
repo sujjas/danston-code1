@@ -22,11 +22,11 @@ export function Hero() {
           </a>
           <a
             href="#about"
-            className="group inline-flex items-center gap-3 font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-navy py-3.5 transition-colors duration-500 ease-smooth hover:text-gold-dark"
+            className="group inline-flex items-center gap-3 font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-navy py-3.5 transition-colors duration-500 ease-smooth hover:text-charcoal-soft"
           >
             <span
               aria-hidden="true"
-              className="flex items-center justify-center w-9 h-9 border-[0.5px] border-navy rounded-full overflow-hidden transition-all duration-500 ease-smooth group-hover:border-gold group-hover:text-gold"
+              className="flex items-center justify-center w-9 h-9 border-[0.5px] border-navy rounded-full overflow-hidden transition-all duration-500 ease-smooth group-hover:border-charcoal-soft"
             >
               <span className="inline-block transition-transform duration-500 ease-smooth group-hover:translate-y-1">
                 ↓
@@ -44,7 +44,7 @@ export function Hero() {
         <br />
         (warm · powerful · real)
       </div>
-      <div className="reveal reveal-delay-4 absolute z-10 w-[420px] bottom-10 left-[calc(50%-99px)] bg-gold text-navy p-9 rounded-sm shadow-[0_30px_80px_rgba(15,27,45,0.35)] max-md:w-[calc(100%-48px)] max-md:max-w-[380px] max-md:-bottom-[70px] max-md:!left-1/2 max-md:-translate-x-1/2 max-md:p-7">
+      <div className="reveal reveal-delay-4 absolute z-10 w-[420px] -bottom-25 left-1/2 -translate-x-1/2 bg-gold text-navy p-9 rounded-sm shadow-[0_30px_80px_rgba(15,27,45,0.35)] max-md:w-[calc(100%-48px)] max-md:max-w-[380px] max-md:-bottom-[70px] max-md:p-7">
         <div className="font-sans text-[10px] tracking-[2.5px] uppercase text-navy/70 mb-4">
           Three decades of practice
         </div>
@@ -63,13 +63,11 @@ export function Problem() {
   return (
     <section className="bg-cream-warm px-14 pt-60 pb-44 max-md:px-6 max-md:pt-50 max-md:pb-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_6fr_3fr] items-start max-md:grid-cols-1 max-md:gap-8">
-        <div className="reveal font-serif italic text-gold-dark text-[14px] tracking-[0.5px] pt-5 before:block before:w-6 before:h-px before:bg-gold before:mb-4">
-          001
-        </div>
-        <h2 className="reveal reveal-delay-1 col-start-2 font-serif font-normal text-navy text-[clamp(36px,5.5vw,72px)] leading-[1.05] tracking-[-0.5px] w-[601px] max-w-full max-md:col-start-1 max-md:col-end-[-1]">
+        <div aria-hidden="true" />
+        <h2 className="reveal col-start-2 font-serif font-normal text-navy text-[clamp(36px,5.5vw,72px)] leading-[1.05] tracking-[-0.5px] w-[601px] max-w-full max-md:col-start-1 max-md:col-end-[-1]">
           Most leaders are working incredibly hard — in the wrong direction.
         </h2>
-        <div className="reveal reveal-delay-2 col-start-3 pt-4 pl-10 max-md:col-start-1 max-md:col-end-[-1] max-md:pl-0">
+        <div className="reveal reveal-delay-1 col-start-3 pt-4 pl-10 max-md:col-start-1 max-md:col-end-[-1] max-md:pl-0">
           <p className="font-sans text-charcoal-soft text-[17px] leading-[1.8]">
             Effort isn&apos;t the issue. Direction is. Before you can build
             something that lasts, you need clarity on who&apos;s doing the
@@ -90,7 +88,7 @@ export function System() {
     <section className="bg-cream px-14 py-40 max-md:px-6 max-md:py-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-2 gap-40 max-md:grid-cols-1 max-md:gap-14">
         <div className="sticky top-30 self-start max-md:static">
-          <div className="reveal text-gold-dark text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-gold before:mr-4">
+          <div className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4">
             The system
           </div>
           <h2 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(40px,5vw,64px)] leading-[1.05] tracking-[-0.4px] w-[593px] max-w-full">
@@ -106,11 +104,11 @@ export function System() {
             AI-integrated forensic diagnostic technology — bespoke to you.
           </p>
           <div className="grid grid-cols-2 gap-12 mb-20 max-md:grid-cols-1 max-md:gap-14 max-md:mb-14">
-            <div className="reveal group border-t border-navy pt-7 transition-colors duration-500 ease-smooth hover:border-gold">
+            <div className="reveal group border-t border-navy pt-7 transition-colors duration-500 ease-smooth">
               <div className="font-serif text-gold text-[56px] leading-none mb-6 transition-transform duration-700 ease-smooth group-hover:-translate-y-1">
                 I
               </div>
-              <h3 className="font-serif font-normal text-navy text-[24px] mb-4.5">
+              <h3 className="font-serif-text font-medium text-navy text-[24px] leading-[1.25] mb-4.5 -tracking-[0.2px]">
                 The I Philosophy
               </h3>
               <div className="font-sans text-charcoal-soft text-[16px] leading-[1.9]">
@@ -121,11 +119,11 @@ export function System() {
                 Leadership
               </div>
             </div>
-            <div className="reveal reveal-delay-2 group border-t border-navy pt-7 transition-colors duration-500 ease-smooth hover:border-gold">
+            <div className="reveal reveal-delay-2 group border-t border-navy pt-7 transition-colors duration-500 ease-smooth">
               <div className="font-serif text-gold text-[56px] leading-none mb-6 transition-transform duration-700 ease-smooth group-hover:-translate-y-1">
                 5D
               </div>
-              <h3 className="font-serif font-normal text-navy text-[24px] mb-4.5">
+              <h3 className="font-serif-text font-medium text-navy text-[24px] leading-[1.25] mb-4.5 -tracking-[0.2px]">
                 The 5D Framework
               </h3>
               <div className="font-sans text-charcoal-soft text-[16px] leading-[1.9]">
@@ -149,16 +147,16 @@ export function System() {
 
 export function PullQuote() {
   return (
-    <section className="relative overflow-hidden bg-navy text-gold text-center px-14 py-45 max-md:px-6 max-md:py-25">
+    <section className="relative overflow-hidden bg-navy text-cream text-center px-14 py-45 max-md:px-6 max-md:py-25">
       <div className="reveal">
-        <span className="quote-mark block font-serif text-[120px] leading-[0.5] text-gold/25 mb-8 origin-center inline-block">
+        <span className="quote-mark block font-serif text-[clamp(72px,8vw,120px)] leading-[0.5] text-cream/30 mb-8 origin-center inline-block">
           &ldquo;
         </span>
-        <blockquote className="font-serif italic font-normal text-gold text-[clamp(28px,4vw,48px)] leading-[1.3] tracking-[-0.2px] max-w-[900px] mx-auto mb-10">
+        <blockquote className="font-serif-text italic font-normal text-cream text-[clamp(28px,4vw,48px)] leading-[1.3] tracking-[-0.2px] max-w-[900px] mx-auto mb-10">
           I don&apos;t fight the fires. I bring in wet logs. As the strengths
           grow, the weaknesses resolve themselves.
         </blockquote>
-        <div className="inline-flex items-center text-cream/50 text-[11px] tracking-[3px] uppercase before:inline-block before:w-8 before:h-px before:bg-cream/40 before:mr-4">
+        <div className="inline-flex items-center font-sans text-cream/50 text-[11px] tracking-[3px] uppercase before:inline-block before:w-8 before:h-px before:bg-cream/40 before:mr-4">
           Danston Mugarura
         </div>
       </div>
@@ -179,7 +177,7 @@ export function About() {
           or in conversation)
         </div>
         <div className="max-w-[580px]">
-          <div className="reveal text-gold-dark text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-gold before:mr-4">
+          <div className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4">
             The man
           </div>
           <h2 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.4px] mb-9">
@@ -196,7 +194,7 @@ export function About() {
             My surname — Mugarura — means the restorer in my mother tongue.
             Everything I do is the proof of it.
           </p>
-          <div className="reveal reveal-delay-4 mt-10 pt-8 border-t border-navy/10 text-gold-dark text-[11px] tracking-[2px] uppercase">
+          <div className="reveal reveal-delay-4 mt-10 pt-8 border-t border-navy/10 font-sans text-charcoal-soft text-[11px] tracking-[2px] uppercase">
             Danston Mugarura · Founder of Code 1
           </div>
         </div>
@@ -215,13 +213,13 @@ export function Footer() {
         <div className="flex gap-8 text-[12px] tracking-[1.5px] uppercase">
           <a
             href="mailto:hello@code1.com"
-            className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-gold after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-gold after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
+            className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
           >
             Email
           </a>
           <a
             href="#"
-            className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-gold after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-gold after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
+            className="relative text-cream/55 transition-colors duration-500 ease-smooth hover:text-cream after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-cream/50 after:origin-left after:scale-x-0 after:transition-transform after:duration-700 after:ease-smooth hover:after:scale-x-100"
           >
             LinkedIn
           </a>

@@ -22,7 +22,7 @@ export function Nav() {
     >
       <a
         href="#"
-        className="group font-serif text-[18px] font-normal tracking-[4px] text-navy transition-[letter-spacing,color] duration-700 ease-smooth hover:tracking-[6px] hover:text-gold-dark"
+        className="group font-serif text-[18px] font-normal tracking-[4px] text-navy transition-[letter-spacing] duration-700 ease-smooth hover:tracking-[6px]"
       >
         CODE 1
       </a>

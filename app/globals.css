@@ -10,6 +10,7 @@
   --color-charcoal: #2A2A2A;
   --color-charcoal-soft: #4A4A4A;
   --font-serif: var(--font-serif-var), Georgia, serif;
+  --font-serif-text: var(--font-serif-text-var), Georgia, serif;
   --font-sans: var(--font-sans-var), system-ui, -apple-system, sans-serif;
 
   /* Smooth easing used everywhere interactive — slow stop, editorial feel. */
@@ -47,16 +48,16 @@
 /* Reveal animations — driven by IntersectionObserver */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(28px);
   transition:
-    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.15s; }
-.reveal-delay-2 { transition-delay: 0.3s; }
-.reveal-delay-3 { transition-delay: 0.45s; }
-.reveal-delay-4 { transition-delay: 0.6s; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }

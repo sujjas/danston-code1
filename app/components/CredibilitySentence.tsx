@@ -65,7 +65,7 @@ export function CredibilitySentence() {
         </div>
         <p
           ref={ref}
-          className="font-serif-text font-normal text-[clamp(32px,4.4vw,64px)] leading-[1.2] tracking-[-0.4px] max-w-[1100px]"
+          className="font-serif font-normal text-[clamp(32px,4.4vw,64px)] leading-[1.15] tracking-[-0.4px] max-w-[1100px]"
         >
           {SEGMENTS.map((seg, i) => {
             // Spread the reveal across roughly the middle of the section's

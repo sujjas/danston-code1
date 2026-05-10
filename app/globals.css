@@ -10,7 +10,6 @@
   --color-charcoal: #2A2A2A;
   --color-charcoal-soft: #4A4A4A;
   --font-serif: var(--font-serif-var), Georgia, serif;
-  --font-serif-text: var(--font-serif-text-var), Georgia, serif;
   --font-sans: var(--font-sans-var), system-ui, -apple-system, sans-serif;
 
   /* Smooth easing used everywhere interactive — slow stop, editorial feel. */

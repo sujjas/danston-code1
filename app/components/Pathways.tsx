@@ -50,10 +50,10 @@ export function Pathways() {
                 onClick={onClick(p.audience)}
                 className="group w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-9 border-t border-navy/10 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
               >
-                <span className="font-serif-text italic text-charcoal-soft text-[16px]">
+                <span className="font-serif italic text-charcoal-soft text-[16px]">
                   {p.num}
                 </span>
-                <span className="font-serif-text font-medium text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3] -tracking-[0.2px]">
+                <span className="font-serif font-normal text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3]">
                   {p.text}
                 </span>
                 <span

@@ -108,7 +108,7 @@ export function System() {
               <div className="font-serif text-gold text-[56px] leading-none mb-6 transition-transform duration-700 ease-smooth group-hover:-translate-y-1">
                 I
               </div>
-              <h3 className="font-serif-text font-medium text-navy text-[24px] leading-[1.25] mb-4.5 -tracking-[0.2px]">
+              <h3 className="font-serif font-normal text-navy text-[24px] leading-[1.3] mb-4.5">
                 The I Philosophy
               </h3>
               <div className="font-sans text-charcoal-soft text-[16px] leading-[1.9]">
@@ -123,7 +123,7 @@ export function System() {
               <div className="font-serif text-gold text-[56px] leading-none mb-6 transition-transform duration-700 ease-smooth group-hover:-translate-y-1">
                 5D
               </div>
-              <h3 className="font-serif-text font-medium text-navy text-[24px] leading-[1.25] mb-4.5 -tracking-[0.2px]">
+              <h3 className="font-serif font-normal text-navy text-[24px] leading-[1.3] mb-4.5">
                 The 5D Framework
               </h3>
               <div className="font-sans text-charcoal-soft text-[16px] leading-[1.9]">
@@ -152,7 +152,7 @@ export function PullQuote() {
         <span className="quote-mark block font-serif text-[clamp(72px,8vw,120px)] leading-[0.5] text-cream/30 mb-8 origin-center inline-block">
           &ldquo;
         </span>
-        <blockquote className="font-serif-text italic font-normal text-cream text-[clamp(28px,4vw,48px)] leading-[1.3] tracking-[-0.2px] max-w-[900px] mx-auto mb-10">
+        <blockquote className="font-serif italic font-normal text-cream text-[clamp(28px,4vw,48px)] leading-[1.3] tracking-[-0.2px] max-w-[900px] mx-auto mb-10">
           I don&apos;t fight the fires. I bring in wet logs. As the strengths
           grow, the weaknesses resolve themselves.
         </blockquote>

@@ -62,6 +62,17 @@
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* Credibility sentence — per-character scroll-driven reveal.
+   The parent <p> sets --progress (0–1) from JS; CSS does the rest, so
+   only one DOM property changes per frame and React never re-renders. */
+.cred-char {
+  opacity: max(0.16, calc((var(--progress, 0) - var(--char-start, 0)) / 0.05));
+  transition: opacity 60ms linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cred-char { opacity: 1; transition: none; }
+}
+
 /* Pull-quote mark — soft scale-in tied to view progress */
 @keyframes quoteMarkIn {
   from { transform: scale(0.6); opacity: 0; }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const SEGMENTS: { text: string; gold?: boolean }[] = [
   { text: "Across " },
@@ -14,21 +14,27 @@ const SEGMENTS: { text: string; gold?: boolean }[] = [
   { text: " books." },
 ];
 
-const FADE_WINDOW = 0.1;
-const MIN_OPACITY = 0.16;
+// Flatten segments to per-character entries.
+const CHARS = SEGMENTS.flatMap((seg) =>
+  Array.from(seg.text).map((c) => ({ c, gold: !!seg.gold }))
+);
+
+const REVEAL_START = 0.15;
+const REVEAL_END = 0.7;
+const FADE = 0.05; // window over which each char fades in
 
 export function CredibilitySentence() {
   const ref = useRef<HTMLParagraphElement>(null);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     if (
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      setProgress(1);
+      el.style.setProperty("--progress", "1");
       return;
     }
 
@@ -37,11 +43,10 @@ export function CredibilitySentence() {
       ticking = false;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // 0 when the element's top is at the bottom of the viewport,
-      // 1 when the element's bottom is at the top of the viewport.
       const total = vh + rect.height;
       const scrolled = vh - rect.top;
-      setProgress(Math.max(0, Math.min(1, scrolled / total)));
+      const p = Math.max(0, Math.min(1, scrolled / total));
+      el.style.setProperty("--progress", String(p));
     };
     const onScroll = () => {
       if (ticking) return;
@@ -57,6 +62,8 @@ export function CredibilitySentence() {
     };
   }, []);
 
+  const last = CHARS.length - 1;
+
   return (
     <section className="bg-navy text-cream px-14 py-45 overflow-hidden max-md:px-6 max-md:py-25">
       <div className="max-w-[1180px] mx-auto">
@@ -65,22 +72,21 @@ export function CredibilitySentence() {
         </div>
         <p
           ref={ref}
-          className="font-serif font-normal text-[clamp(32px,4.4vw,64px)] leading-[1.15] tracking-[-0.4px] max-w-[1100px]"
+          className="cred-sentence font-serif font-normal text-[clamp(32px,4.4vw,64px)] leading-[1.15] tracking-[-0.4px] max-w-[1100px]"
+          style={{ ["--progress" as string]: 0 } as React.CSSProperties}
         >
-          {SEGMENTS.map((seg, i) => {
-            // Spread the reveal across roughly the middle of the section's
-            // travel through the viewport (0.15 → 0.7 of progress).
-            const total = SEGMENTS.length;
-            const segPoint = 0.15 + (i / (total - 1)) * 0.55;
-            const t = (progress - (segPoint - FADE_WINDOW)) / FADE_WINDOW;
-            const opacity = Math.max(MIN_OPACITY, Math.min(1, t));
+          {CHARS.map(({ c, gold }, i) => {
+            const point = REVEAL_START + (i / last) * (REVEAL_END - REVEAL_START);
+            const start = point - FADE;
             return (
               <span
                 key={i}
-                className={seg.gold ? "text-gold" : "text-cream"}
-                style={{ opacity, transition: "opacity 120ms linear" }}
+                className={`cred-char${gold ? " text-gold" : ""}`}
+                style={
+                  { ["--char-start" as string]: start.toFixed(4) } as React.CSSProperties
+                }
               >
-                {seg.text}
+                {c}
               </span>
             );
           })}

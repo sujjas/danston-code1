@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function Nav() {
@@ -22,9 +23,17 @@ export function Nav() {
     >
       <a
         href="#"
-        className="group font-serif text-[18px] font-normal tracking-[4px] text-navy transition-[letter-spacing] duration-700 ease-smooth hover:tracking-[6px]"
+        className="block transition-opacity duration-500 ease-smooth hover:opacity-70"
+        aria-label="Code 1 — home"
       >
-        CODE 1
+        <Image
+          src="/logos/full-navy.svg"
+          alt="Code 1"
+          width={120}
+          height={26}
+          priority
+          className="h-6 w-auto"
+        />
       </a>
       <a
         href="#assessment"

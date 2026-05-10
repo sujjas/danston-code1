@@ -207,8 +207,15 @@ export function Footer() {
   return (
     <footer className="bg-navy-deep text-cream/60 px-14 py-16 border-t border-gold/15 max-md:px-6">
       <div className="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-6 max-md:flex-col max-md:text-center">
-        <div className="font-sans text-[15px]">
-          Because your potential is always the highest priority.
+        <div className="flex items-center gap-6 max-md:flex-col max-md:gap-3">
+          <img
+            src="/logos/on-navy.svg"
+            alt="Code 1"
+            className="h-5 w-auto opacity-80"
+          />
+          <div className="font-sans text-[15px]">
+            Because your potential is always the highest priority.
+          </div>
         </div>
         <div className="flex gap-8 text-[12px] tracking-[1.5px] uppercase">
           <a

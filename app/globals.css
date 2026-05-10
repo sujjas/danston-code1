@@ -65,9 +65,12 @@
 /* Credibility sentence — per-character scroll-driven reveal.
    The parent <p> sets --progress (0–1) from JS; CSS does the rest, so
    only one DOM property changes per frame and React never re-renders. */
+.cred-sentence { --progress: 0; }
 .cred-char {
-  opacity: max(0.16, calc((var(--progress, 0) - var(--char-start, 0)) / 0.05));
-  transition: opacity 60ms linear;
+  --char-start: 0;
+  /* per-character scroll fade — clamp 0.16..1 over a 0.05 window */
+  opacity: clamp(0.16, calc((var(--progress) - var(--char-start)) * 20), 1);
+  transition: opacity 80ms linear;
 }
 @media (prefers-reduced-motion: reduce) {
   .cred-char { opacity: 1; transition: none; }

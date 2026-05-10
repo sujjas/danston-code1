@@ -65,12 +65,22 @@
 /* Credibility sentence — per-character scroll-driven reveal.
    The parent <p> sets --progress (0–1) from JS; CSS does the rest, so
    only one DOM property changes per frame and React never re-renders. */
-.cred-sentence { --progress: 0; }
+.cred-sentence {
+  --progress: 0;
+  --fade-window: 0.05;
+  --min-opacity: 0.16;
+  --transition-ms: 80ms;
+}
 .cred-char {
   --char-start: 0;
-  /* per-character scroll fade — clamp 0.16..1 over a 0.05 window */
-  opacity: clamp(0.16, calc((var(--progress) - var(--char-start)) * 20), 1);
-  transition: opacity 80ms linear;
+  /* per-character scroll fade — values driven by CSS vars on the parent
+     so the dev-only DialKit panel can tune live. */
+  opacity: clamp(
+    var(--min-opacity),
+    calc((var(--progress) - var(--char-start)) / var(--fade-window)),
+    1
+  );
+  transition: opacity var(--transition-ms) linear;
 }
 @media (prefers-reduced-motion: reduce) {
   .cred-char { opacity: 1; transition: none; }

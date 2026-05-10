@@ -14,14 +14,22 @@ const SEGMENTS: { text: string; gold?: boolean }[] = [
   { text: " books." },
 ];
 
-// Flatten segments to per-character entries.
-const CHARS = SEGMENTS.flatMap((seg) =>
-  Array.from(seg.text).map((c) => ({ c, gold: !!seg.gold }))
-);
+// Tokenize each segment into word-with-padding chunks so we reveal one
+// word at a time. The regex matches optional leading whitespace + word +
+// optional trailing whitespace, so spacing is preserved on the resulting
+// inline spans.
+const WORDS = SEGMENTS.flatMap((seg) => {
+  const matches = seg.text.match(/\s*\S+\s*/g);
+  if (!matches) return [{ w: seg.text, gold: false }];
+  return matches.map((w) => ({ w, gold: !!seg.gold }));
+});
 
-const REVEAL_START = 0.15;
-const REVEAL_END = 0.7;
-const FADE = 0.05; // window over which each char fades in
+// Tuned values (locked in after dial-kit tuning).
+const REVEAL_START = 0.2;
+const REVEAL_END = 0.83;
+const FADE_WINDOW = 0.01;
+const MIN_OPACITY = 0.12;
+const TRANSITION_MS = 10;
 
 export function CredibilitySentence() {
   const ref = useRef<HTMLParagraphElement>(null);
@@ -43,9 +51,11 @@ export function CredibilitySentence() {
       ticking = false;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      const total = vh + rect.height;
-      const scrolled = vh - rect.top;
-      const p = Math.max(0, Math.min(1, scrolled / total));
+      // Progress = 0 when the element's top is at the bottom of the viewport,
+      // 1 when its top reaches the top of the viewport. So the reveal
+      // begins as the text enters from below and is done by the time the
+      // text is sitting at the top of the screen.
+      const p = Math.max(0, Math.min(1, (vh - rect.top) / vh));
       el.style.setProperty("--progress", String(p));
     };
     const onScroll = () => {
@@ -62,7 +72,8 @@ export function CredibilitySentence() {
     };
   }, []);
 
-  const last = CHARS.length - 1;
+  const last = WORDS.length - 1;
+  const span = REVEAL_END - REVEAL_START;
 
   return (
     <section className="bg-navy text-cream px-14 py-45 overflow-hidden max-md:px-6 max-md:py-25">
@@ -73,11 +84,18 @@ export function CredibilitySentence() {
         <p
           ref={ref}
           className="cred-sentence font-serif font-normal text-[clamp(32px,4.4vw,64px)] leading-[1.15] tracking-[-0.4px] max-w-[1100px]"
-          style={{ ["--progress" as string]: 0 } as React.CSSProperties}
+          style={
+            {
+              ["--progress" as string]: 0,
+              ["--fade-window" as string]: FADE_WINDOW,
+              ["--min-opacity" as string]: MIN_OPACITY,
+              ["--transition-ms" as string]: `${TRANSITION_MS}ms`,
+            } as React.CSSProperties
+          }
         >
-          {CHARS.map(({ c, gold }, i) => {
-            const point = REVEAL_START + (i / last) * (REVEAL_END - REVEAL_START);
-            const start = point - FADE;
+          {WORDS.map(({ w, gold }, i) => {
+            const point = REVEAL_START + (last === 0 ? 0 : (i / last) * span);
+            const start = point - FADE_WINDOW;
             return (
               <span
                 key={i}
@@ -86,7 +104,7 @@ export function CredibilitySentence() {
                   { ["--char-start" as string]: start.toFixed(4) } as React.CSSProperties
                 }
               >
-                {c}
+                {w}
               </span>
             );
           })}

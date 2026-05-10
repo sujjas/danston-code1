@@ -1,49 +1,87 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0F1B2D;
+  --color-navy-deep: #0a121f;
+  --color-gold: #C9A961;
+  --color-gold-dark: #8B6F2E;
+  --color-cream: #F5F1E8;
+  --color-cream-warm: #FAF8F2;
+  --color-charcoal: #2A2A2A;
+  --color-charcoal-soft: #4A4A4A;
+  --font-serif: var(--font-serif-var), Georgia, serif;
+  --font-sans: var(--font-sans-var), system-ui, -apple-system, sans-serif;
+
+  /* Smooth easing used everywhere interactive — slow stop, editorial feel. */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-cream);
+    color: var(--color-charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 }
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer components {
+  /* Section eyebrow — hairline + uppercase label */
+  .eyebrow {
+    @apply inline-flex items-center gap-4 text-[11px] tracking-[3px] uppercase font-sans;
+  }
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
   }
 }
+
+/* Reveal animations — driven by IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Pull-quote mark — soft scale-in tied to view progress */
+@keyframes quoteMarkIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1); opacity: 0.25; }
+}
+@supports (animation-timeline: view()) {
+  .quote-mark {
+    opacity: 0;
+    animation: quoteMarkIn cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 35%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quote-mark { opacity: 0.25; animation: none; transform: none; }
+}
+
+/* Multi-step form transition */
+@keyframes stepIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.step-in { animation: stepIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }

@@ -19,13 +19,9 @@ export function Pathways() {
     window.dispatchEvent(
       new CustomEvent<Audience>("code1:audience", { detail: audience })
     );
-    const target = document.getElementById("assessment");
-    if (!target) return;
-    if (window.__lenis) {
-      window.__lenis.scrollTo(target, { offset: -80 });
-    } else {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    document
+      .getElementById("assessment")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

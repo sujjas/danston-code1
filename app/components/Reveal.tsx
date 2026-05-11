@@ -112,6 +112,7 @@ export function RevealObserver() {
             ease: "power3.out",
             stagger: 0.08,
             overwrite: true,
+            clearProps: "transform,willChange",
           });
           const marks = els.filter((e) =>
             (e as HTMLElement).hasAttribute("data-mark")

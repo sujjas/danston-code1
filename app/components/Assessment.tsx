@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import {
   AUDIENCES,
   WORK_MODES,
@@ -305,17 +306,7 @@ export function Assessment() {
           </Step>
         )}
 
-        {completed && (
-          <div className="step-in text-center py-10">
-            <h3 className="font-serif font-normal text-gold text-[36px] mb-5">
-              Thank you.
-            </h3>
-            <p className="font-sans text-cream/80 text-[17px] leading-[1.7] max-w-[480px] mx-auto">
-              Your assessment has been received. Danston or a member of the
-              Code 1 team will respond personally within 48 hours.
-            </p>
-          </div>
-        )}
+        {completed && <CompletedPanel />}
 
         {!completed && (
           <>
@@ -357,6 +348,43 @@ export function Assessment() {
   );
 }
 
+function CompletedPanel() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const kids = el.querySelectorAll<HTMLElement>(":scope > *");
+    gsap.fromTo(
+      kids,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.12,
+      }
+    );
+  }, []);
+  return (
+    <div ref={ref} className="text-center py-10">
+      <h3 className="font-serif font-normal text-gold text-[36px] mb-5">
+        Thank you.
+      </h3>
+      <p className="font-sans text-cream/80 text-[17px] leading-[1.7] max-w-[480px] mx-auto">
+        Your assessment has been received. Danston or a member of the Code 1
+        team will respond personally within 48 hours.
+      </p>
+    </div>
+  );
+}
+
 function Step({
   n,
   q,
@@ -366,8 +394,45 @@ function Step({
   q: string;
   children: React.ReactNode;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const tl = gsap.timeline();
+    tl.fromTo(
+      el,
+      { opacity: 0, x: 28 },
+      { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }
+    );
+    // Stagger the inner blocks slightly so the question and inputs settle in
+    const children = el.querySelectorAll<HTMLElement>(":scope > *");
+    if (children.length) {
+      tl.fromTo(
+        children,
+        { opacity: 0, y: 12 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.45,
+          ease: "power2.out",
+          stagger: 0.07,
+        },
+        "-=0.4"
+      );
+    }
+    return () => {
+      tl.kill();
+    };
+  }, [n]);
+
   return (
-    <div className="step-in">
+    <div ref={ref}>
       <div className="text-gold text-[11px] tracking-[2px] uppercase mb-4">
         Question {n} of {TOTAL_STEPS}
       </div>

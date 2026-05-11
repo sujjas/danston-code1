@@ -4,23 +4,31 @@ export function Hero() {
   return (
     <section className="relative grid grid-cols-2 min-h-screen pt-[90px] bg-cream max-md:grid-cols-1 max-md:min-h-0">
       <div className="flex flex-col justify-end px-14 pt-10 pb-20 min-h-[calc(100vh-90px)] max-md:px-6 max-md:py-10 max-md:min-h-0">
-        <div className="reveal w-12 h-px bg-gold mb-7" />
-        <h1 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(40px,5.5vw,76px)] leading-[1.02] tracking-[-0.6px] mb-7 max-w-[540px]">
+        <div data-hero-rule className="w-12 h-px bg-gold mb-7" />
+        <h1
+          data-hero-headline
+          className="font-serif font-normal text-navy text-[clamp(40px,5.5vw,76px)] leading-[1.02] tracking-[-0.6px] mb-7 max-w-[540px]"
+        >
           Your potential is always the highest priority.
         </h1>
-        <p className="reveal reveal-delay-2 font-sans text-charcoal-soft text-[18px] leading-[1.6] mb-12 max-w-[460px]">
+        <p
+          data-hero-sub
+          className="font-sans text-charcoal-soft text-[18px] leading-[1.6] mb-12 max-w-[460px]"
+        >
           Leadership development, business transformation, and human potential
           — for leaders, organisations, and governments across Africa and
           beyond.
         </p>
-        <div className="reveal reveal-delay-3 flex flex-wrap items-center gap-5">
+        <div className="flex flex-wrap items-center gap-5">
           <a
+            data-hero-cta
             href="#assessment"
             className="inline-block font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-cream bg-navy border-[0.5px] border-navy px-8 py-4 rounded-full transition-all duration-500 ease-smooth hover:bg-gold hover:border-gold hover:text-navy hover:-translate-y-0.5"
           >
             Begin assessment
           </a>
           <a
+            data-hero-cta
             href="#about"
             className="group inline-flex items-center gap-3 font-sans text-[12px] font-medium tracking-[1.5px] uppercase text-navy py-3.5 transition-colors duration-500 ease-smooth hover:text-charcoal-soft"
           >
@@ -44,7 +52,10 @@ export function Hero() {
         <br />
         (warm · powerful · real)
       </div>
-      <div className="reveal reveal-delay-4 absolute z-10 w-[420px] -bottom-25 left-1/2 -translate-x-1/2 bg-gold text-navy p-9 rounded-sm shadow-[0_30px_80px_rgba(15,27,45,0.35)] max-md:w-[calc(100%-48px)] max-md:max-w-[380px] max-md:-bottom-[70px] max-md:p-7">
+      <div
+        data-hero-card
+        className="absolute z-10 w-[420px] -bottom-25 left-1/2 -translate-x-1/2 bg-gold text-navy p-9 rounded-sm shadow-[0_30px_80px_rgba(15,27,45,0.35)] max-md:w-[calc(100%-48px)] max-md:max-w-[380px] max-md:-bottom-[70px] max-md:p-7"
+      >
         <div className="font-sans text-[10px] tracking-[2.5px] uppercase text-navy/70 mb-4">
           Three decades of practice
         </div>
@@ -64,7 +75,10 @@ export function Problem() {
     <section className="bg-cream-warm px-14 pt-60 pb-44 max-md:px-6 max-md:pt-50 max-md:pb-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_6fr_3fr] items-start max-md:grid-cols-1 max-md:gap-8">
         <div aria-hidden="true" />
-        <h2 className="reveal col-start-2 font-serif font-normal text-navy text-[clamp(36px,5.5vw,72px)] leading-[1.05] tracking-[-0.5px] w-[601px] max-w-full max-md:col-start-1 max-md:col-end-[-1]">
+        <h2
+          data-split
+          className="col-start-2 font-serif font-normal text-navy text-[clamp(36px,5.5vw,72px)] leading-[1.05] tracking-[-0.5px] w-[601px] max-w-full max-md:col-start-1 max-md:col-end-[-1]"
+        >
           Most leaders are working incredibly hard — in the wrong direction.
         </h2>
         <div className="reveal reveal-delay-1 col-start-3 pt-4 pl-10 max-md:col-start-1 max-md:col-end-[-1] max-md:pl-0">
@@ -88,10 +102,16 @@ export function System() {
     <section className="bg-cream px-14 py-40 max-md:px-6 max-md:py-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-2 gap-40 max-md:grid-cols-1 max-md:gap-14">
         <div className="sticky top-30 self-start max-md:static">
-          <div className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4">
+          <div
+            data-mark
+            className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4"
+          >
             The system
           </div>
-          <h2 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(40px,5vw,64px)] leading-[1.05] tracking-[-0.4px] w-[593px] max-w-full">
+          <h2
+            data-split
+            className="font-serif font-normal text-navy text-[clamp(40px,5vw,64px)] leading-[1.05] tracking-[-0.4px] w-[593px] max-w-full"
+          >
             First who you are.
             <br />
             Then what you build.
@@ -147,12 +167,18 @@ export function System() {
 
 export function PullQuote() {
   return (
-    <section className="relative overflow-hidden bg-navy text-cream text-center px-14 py-45 max-md:px-6 max-md:py-25">
-      <div className="reveal">
+    <section
+      data-pullquote
+      className="relative overflow-hidden bg-navy text-cream text-center px-14 py-45 max-md:px-6 max-md:py-25"
+    >
+      <div>
         <span className="quote-mark block font-serif text-[clamp(72px,8vw,120px)] leading-[0.5] text-cream/30 mb-8 origin-center inline-block">
           &ldquo;
         </span>
-        <blockquote className="font-serif italic font-normal text-cream text-[clamp(28px,4vw,48px)] leading-[1.3] tracking-[-0.2px] max-w-[900px] mx-auto mb-10">
+        <blockquote
+          data-pullquote-text
+          className="font-serif italic font-normal text-cream text-[clamp(28px,4vw,48px)] leading-[1.3] tracking-[-0.2px] max-w-[900px] mx-auto mb-10"
+        >
           I don&apos;t fight the fires. I bring in wet logs. As the strengths
           grow, the weaknesses resolve themselves.
         </blockquote>
@@ -168,7 +194,7 @@ export function About() {
   return (
     <section id="about" className="bg-cream-warm px-14 py-40 max-md:px-6 max-md:py-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_1.5fr] gap-25 items-center max-md:grid-cols-1 max-md:gap-12">
-        <div className="reveal aspect-[3/4] flex items-center justify-center text-center bg-[linear-gradient(135deg,#1a2942_0%,#0F1B2D_100%)] border-[0.5px] border-dashed border-gold/30 text-cream/40 text-[12px] leading-[1.8] p-10 max-md:max-w-[280px] max-md:mx-auto">
+        <div data-parallax="36" className="aspect-[3/4] flex items-center justify-center text-center bg-[linear-gradient(135deg,#1a2942_0%,#0F1B2D_100%)] border-[0.5px] border-dashed border-gold/30 text-cream/40 text-[12px] leading-[1.8] p-10 max-md:max-w-[280px] max-md:mx-auto">
           Photograph of Danston
           <br />
           <br />
@@ -177,10 +203,16 @@ export function About() {
           or in conversation)
         </div>
         <div className="max-w-[580px]">
-          <div className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4">
+          <div
+            data-mark
+            className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4"
+          >
             The man
           </div>
-          <h2 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.4px] mb-9">
+          <h2
+            data-split
+            className="font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.4px] mb-9"
+          >
             My name means the restorer.
           </h2>
           <p className="reveal reveal-delay-2 font-sans text-charcoal-soft text-[18px] leading-[1.85] mb-6">

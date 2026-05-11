@@ -1,5 +1,6 @@
 import { Nav } from "./components/Nav";
 import { RevealObserver } from "./components/Reveal";
+import { SmoothScroll } from "./components/SmoothScroll";
 import {
   About,
   Credibility,
@@ -15,6 +16,7 @@ import { Assessment } from "./components/Assessment";
 export default function Home() {
   return (
     <>
+      <SmoothScroll />
       <Nav />
       <RevealObserver />
       <main>

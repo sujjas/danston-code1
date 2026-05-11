@@ -17,7 +17,14 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  /* Lenis (smooth scroll) — when active, .lenis class is added to <html>.
+     We disable native smooth scrolling so Lenis owns the timing. */
+  html.lenis,
+  html.lenis body { height: auto; }
+  html.lenis.lenis-smooth { scroll-behavior: auto !important; }
+  html.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  html.lenis.lenis-stopped { overflow: clip; }
+
   body {
     font-family: var(--font-sans);
     background: var(--color-cream);
@@ -26,6 +33,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+  }
+
+  /* Reduced-motion users keep native instant scrolling */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 }
 
@@ -44,22 +56,17 @@
   }
 }
 
-/* Reveal animations — driven by IntersectionObserver */
+/* Reveal animations — driven by GSAP ScrollTrigger.batch (see Reveal.tsx).
+   Initial hidden state kept here so SSR + first paint don't flash before JS
+   takes over. GSAP overrides inline styles on entry. */
 .reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; }
 }
 
 /* Credibility sentence — per-character scroll-driven reveal.
@@ -86,26 +93,45 @@
   .cred-char { opacity: 1; transition: none; }
 }
 
-/* Pull-quote mark — soft scale-in tied to view progress */
-@keyframes quoteMarkIn {
-  from { transform: scale(0.6); opacity: 0; }
-  to   { transform: scale(1); opacity: 0.25; }
-}
-@supports (animation-timeline: view()) {
-  .quote-mark {
-    opacity: 0;
-    animation: quoteMarkIn cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-timeline: view();
-    animation-range: cover 0% cover 35%;
-  }
-}
+/* Pull-quote mark — scrub-driven scale handled by GSAP (see Reveal.tsx).
+   Start hidden so JS can ease it in without flash. */
+.quote-mark { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
-  .quote-mark { opacity: 0.25; animation: none; transform: none; }
+  .quote-mark { opacity: 0.25; transform: none; }
 }
 
-/* Multi-step form transition */
-@keyframes stepIn {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+/* Multi-step form transition — handled by GSAP in Assessment.tsx.
+   Class retained as a no-op so existing markup still validates. */
+.step-in { /* intentionally empty */ }
+
+/* Eyebrow / section marker hairline — drawn in via GSAP scaling the
+   ::before pseudo-element through the custom property --mx (0 → 1). */
+[data-mark]::before,
+[data-mark]::after {
+  transform-origin: left center;
+  transform: scaleX(var(--mx, 1));
 }
-.step-in { animation: stepIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* SplitText line mask — keeps each line clipped while we slide it up */
+.split-line {
+  overflow: hidden;
+  display: block;
+}
+
+/* Nav background scrubs in over the first 120px of scroll via --nav-p */
+nav.nav-scrub {
+  --nav-p: 0;
+}
+nav.nav-scrub > .nav-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 241, 232, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 27, 45, 0.1);
+  opacity: var(--nav-p);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  nav.nav-scrub > .nav-bg { transition: opacity 0.3s linear; }
+}

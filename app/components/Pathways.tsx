@@ -19,19 +19,29 @@ export function Pathways() {
     window.dispatchEvent(
       new CustomEvent<Audience>("code1:audience", { detail: audience })
     );
-    document
-      .getElementById("assessment")
-      ?.scrollIntoView({ behavior: "smooth" });
+    const target = document.getElementById("assessment");
+    if (!target) return;
+    if (window.__lenis) {
+      window.__lenis.scrollTo(target, { offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <section className="bg-cream px-14 py-40 max-md:px-6 max-md:py-25">
       <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_1.3fr] gap-30 items-start max-md:grid-cols-1 max-md:gap-12">
         <div className="sticky top-30 max-md:static">
-          <div className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4">
+          <div
+            data-mark
+            className="reveal font-sans text-charcoal-soft text-[11px] tracking-[3px] uppercase mb-8 before:inline-block before:align-middle before:w-8 before:h-px before:bg-charcoal-soft/30 before:mr-4"
+          >
             For whom
           </div>
-          <h2 className="reveal reveal-delay-1 font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.3px] mb-6">
+          <h2
+            data-split
+            className="font-serif font-normal text-navy text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.3px] mb-6"
+          >
             Who do you need to become?
           </h2>
           <p className="reveal reveal-delay-2 font-sans text-charcoal-soft text-[17px] leading-[1.7] max-w-[360px]">
@@ -48,9 +58,13 @@ export function Pathways() {
               <button
                 type="button"
                 onClick={onClick(p.audience)}
-                className="group w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-9 border-t border-navy/10 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
+                className="group relative w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-9 border-t border-navy/10 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
               >
-                <span className="font-serif italic text-charcoal-soft text-[16px]">
+                <span
+                  aria-hidden="true"
+                  className="absolute -top-px left-0 right-0 h-px bg-gold origin-left scale-x-0 transition-transform duration-700 ease-smooth group-hover:scale-x-100"
+                />
+                <span className="font-serif italic text-charcoal-soft text-[16px] transition-transform duration-500 ease-smooth group-hover:translate-x-2">
                   {p.num}
                 </span>
                 <span className="font-serif font-normal text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3]">

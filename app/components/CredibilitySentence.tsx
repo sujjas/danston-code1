@@ -78,7 +78,10 @@ export function CredibilitySentence() {
   return (
     <section className="bg-navy text-cream px-14 py-45 overflow-hidden max-md:px-6 max-md:py-25">
       <div className="max-w-[1180px] mx-auto">
-        <div className="reveal font-sans text-cream/55 text-[11px] tracking-[3px] uppercase mb-12 before:inline-block before:align-middle before:w-8 before:h-px before:bg-cream/30 before:mr-4">
+        <div
+          data-mark
+          className="reveal font-sans text-cream/55 text-[11px] tracking-[3px] uppercase mb-12 before:inline-block before:align-middle before:w-8 before:h-px before:bg-cream/30 before:mr-4"
+        >
           Track record
         </div>
         <p

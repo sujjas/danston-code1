@@ -59,9 +59,15 @@ export function RevealObserver() {
       });
       if (heroRule) heroTl.to(heroRule, { scaleX: 1, duration: 0.7 });
       if (heroSplit) {
+        const split = heroSplit;
         heroTl.to(
-          heroSplit.lines,
-          { yPercent: 0, duration: 0.95, stagger: 0.08 },
+          split.lines,
+          {
+            yPercent: 0,
+            duration: 0.95,
+            stagger: 0.08,
+            onComplete: () => split.revert(),
+          },
           "-=0.45"
         );
       }
@@ -95,6 +101,7 @@ export function RevealObserver() {
               duration: 0.9,
               ease: "power3.out",
               stagger: 0.08,
+              onComplete: () => split.revert(),
             }),
         });
       });

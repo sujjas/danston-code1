@@ -267,15 +267,37 @@ export function RevealObserver() {
         : Promise.resolve();
 
     const ctxHolder: { ctx: gsap.Context | null } = { ctx: null };
+
+    // Several pinned sections above About / Assessment (System horizontal
+    // scroll + Pull Quote pin) inflate document height. ScrollTrigger must
+    // be refreshed after every layout-altering settle event, otherwise
+    // triggers for later sections fire off-screen before the user reaches
+    // them and once:true animations replay invisibly.
+    const lateRefreshes: number[] = [];
+    const refresh = () => {
+      if (cancelled) return;
+      ScrollTrigger.refresh(true);
+    };
+
     ready.then(() => {
       if (cancelled) return;
       ctxHolder.ctx = gsap.context(setup);
-      // Recalculate trigger positions after fonts settle
-      ScrollTrigger.refresh();
+      refresh();
+      lateRefreshes.push(window.setTimeout(refresh, 200));
+      lateRefreshes.push(window.setTimeout(refresh, 800));
+      lateRefreshes.push(window.setTimeout(refresh, 2000));
     });
+
+    const onLoad = () => refresh();
+    const onResize = () => refresh();
+    window.addEventListener("load", onLoad);
+    window.addEventListener("resize", onResize);
 
     return () => {
       cancelled = true;
+      lateRefreshes.forEach((id) => window.clearTimeout(id));
+      window.removeEventListener("load", onLoad);
+      window.removeEventListener("resize", onResize);
       splits.forEach((s) => s.revert());
       ctxHolder.ctx?.revert();
     };

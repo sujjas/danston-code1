@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, DM_Sans } from "next/font/google";
 import { Agentation } from "agentation";
-import { SmoothScroll } from "./components/SmoothScroll";
 import "./globals.css";
 
 const dmSerif = DM_Serif_Display({
@@ -33,7 +32,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSerif.variable} ${dmSans.variable}`}>
       <body>
-        <SmoothScroll />
         {children}
         {process.env.NODE_ENV === "development" && <Agentation />}
       </body>

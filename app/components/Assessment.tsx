@@ -142,7 +142,7 @@ export function Assessment() {
   const completed = status === "done";
 
   return (
-    <section id="assessment" className="bg-navy text-cream px-14 py-40 max-md:px-6 max-md:py-25">
+    <section id="assessment" className="bg-navy text-cream px-[var(--rail-x)] py-40 max-md:py-25">
       <div className="max-w-[720px] mx-auto mb-20 text-center">
         <div className="reveal text-gold text-[11px] tracking-[3px] uppercase mb-7 inline-flex items-center before:inline-block before:w-8 before:h-px before:bg-gold before:mx-4 after:inline-block after:w-8 after:h-px after:bg-gold after:mx-4">
           The assessment

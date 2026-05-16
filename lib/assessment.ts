@@ -1,8 +1,10 @@
 export const AUDIENCES = [
-  "Individual",
-  "Sales Professional",
+  "Leader",
+  "Executive Team",
   "Organisation",
-  "Government",
+  "Sales Team",
+  "Government or Institution",
+  "Business in Growth or Reinvention",
 ] as const;
 export type Audience = (typeof AUDIENCES)[number];
 

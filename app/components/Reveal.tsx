@@ -36,6 +36,7 @@ export function RevealObserver() {
       const heroSub = document.querySelector<HTMLElement>("[data-hero-sub]");
       const heroCtas = gsap.utils.toArray<HTMLElement>("[data-hero-cta]");
       const heroCard = document.querySelector<HTMLElement>("[data-hero-card]");
+      const heroPhoto = document.querySelector<HTMLElement>("[data-hero-photo]");
 
       let heroSplit: SplitText | null = null;
       if (heroHeadline) {
@@ -52,12 +53,15 @@ export function RevealObserver() {
       // Card keeps its translateX(-50%) via xPercent so GSAP doesn't wipe it
       if (heroCard) gsap.set(heroCard, { opacity: 0, y: 36, xPercent: -50 });
       if (heroRule) gsap.set(heroRule, { scaleX: 0, transformOrigin: "left center" });
+      if (heroPhoto) gsap.set(heroPhoto, { opacity: 0, scale: 1.04, transformOrigin: "center center" });
 
       const heroTl = gsap.timeline({
         delay: 0.1,
         defaults: { ease: "power3.out" },
       });
-      if (heroRule) heroTl.to(heroRule, { scaleX: 1, duration: 0.7 });
+      if (heroPhoto)
+        heroTl.to(heroPhoto, { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, 0);
+      if (heroRule) heroTl.to(heroRule, { scaleX: 1, duration: 0.7 }, 0.1);
       if (heroSplit) {
         const split = heroSplit;
         heroTl.to(
@@ -165,6 +169,53 @@ export function RevealObserver() {
             },
           }
         );
+      });
+
+      // --- Africa Mission triplet: number scales + text staggers on enter ---
+      gsap.utils.toArray<HTMLElement>("[data-triplet]").forEach((triplet) => {
+        const blocks = triplet.querySelectorAll<HTMLElement>("[data-triplet-block]");
+        const numbers = triplet.querySelectorAll<HTMLElement>("[data-triplet-number]");
+        const texts = triplet.querySelectorAll<HTMLElement>("[data-triplet-text]");
+        gsap.set(blocks, { opacity: 0 });
+        gsap.set(numbers, { opacity: 0, y: 24, scale: 0.7, transformOrigin: "left bottom" });
+        gsap.set(texts, { opacity: 0, y: 16 });
+        ScrollTrigger.create({
+          trigger: triplet,
+          start: "top 85%",
+          once: true,
+          onEnter: () => {
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+            tl.to(blocks, { opacity: 1, duration: 0.4, stagger: 0.15 });
+            tl.to(
+              numbers,
+              { opacity: 1, y: 0, scale: 1, duration: 1, stagger: 0.15, ease: "back.out(1.4)" },
+              "-=0.35"
+            );
+            tl.to(
+              texts,
+              { opacity: 1, y: 0, duration: 0.7, stagger: 0.06 },
+              "-=0.75"
+            );
+          },
+        });
+      });
+
+      // --- Pathways rows: stagger entrance with gold rule draw ---
+      gsap.utils.toArray<HTMLElement>("[data-pathway-row]").forEach((row, i) => {
+        const rule = row.querySelector<HTMLElement>("[data-pathway-rule]");
+        const content = row.querySelectorAll<HTMLElement>("[data-pathway-content]");
+        if (rule) gsap.set(rule, { scaleX: 0, transformOrigin: "left center" });
+        gsap.set(content, { opacity: 0, y: 18 });
+        ScrollTrigger.create({
+          trigger: row,
+          start: "top 90%",
+          once: true,
+          onEnter: () => {
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" }, delay: i * 0.06 });
+            if (rule) tl.to(rule, { scaleX: 1, duration: 0.8, ease: "power3.inOut" });
+            tl.to(content, { opacity: 1, y: 0, duration: 0.7, stagger: 0.05 }, "-=0.55");
+          },
+        });
       });
 
       // --- Pull-quote mark scrub scale ---

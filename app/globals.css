@@ -16,6 +16,22 @@
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Shared content rail.
+   --rail: the design rail width on wide screens.
+   --rail-x: horizontal padding so left-aligned content lines up across
+   every section. Collapses to 56px on screens narrower than --rail, and
+   24px on mobile. */
+:root {
+  --rail: 1280px;
+  --rail-x: max(56px, calc((100vw - var(--rail)) / 2));
+}
+
+@media (max-width: 768px) {
+  :root {
+    --rail-x: 24px;
+  }
+}
+
 @layer base {
   html { scroll-behavior: smooth; }
   body {
@@ -108,20 +124,3 @@
   display: block;
 }
 
-/* Nav background scrubs in over the first 120px of scroll via --nav-p */
-nav.nav-scrub {
-  --nav-p: 0;
-}
-nav.nav-scrub > .nav-bg {
-  position: absolute;
-  inset: 0;
-  background: rgba(245, 241, 232, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(15, 27, 45, 0.1);
-  opacity: var(--nav-p);
-  pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  nav.nav-scrub > .nav-bg { transition: opacity 0.3s linear; }
-}

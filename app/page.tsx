@@ -2,6 +2,7 @@ import { Nav } from "./components/Nav";
 import { RevealObserver } from "./components/Reveal";
 import {
   About,
+  AfricaMission,
   Credibility,
   Footer,
   Hero,
@@ -23,6 +24,7 @@ export default function Home() {
         <Credibility />
         <System />
         <PullQuote />
+        <AfricaMission />
         <Pathways />
         <About />
         <Assessment />

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, DM_Sans } from "next/font/google";
 import { Agentation } from "agentation";
-import { InterfaceKit } from "interface-kit/react";
 import "./globals.css";
 
 const dmSerif = DM_Serif_Display({
@@ -22,7 +21,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Code 1 — Because your potential is always the highest priority.",
   description:
-    "Leadership development, business transformation, and human potential — for leaders, organisations, and governments across Africa and beyond.",
+    "The Restoration System for leaders and organisations. Restore the leader. Reveal the truth. Scale human intelligence.",
 };
 
 export default function RootLayout({
@@ -35,7 +34,6 @@ export default function RootLayout({
       <body>
         {children}
         {process.env.NODE_ENV === "development" && <Agentation />}
-        {process.env.NODE_ENV === "development" && <InterfaceKit />}
       </body>
     </html>
   );

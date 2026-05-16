@@ -3,10 +3,12 @@
 import type { Audience } from "@/lib/assessment";
 
 const PATHWAYS: { num: string; text: string; audience: Audience }[] = [
-  { num: "01", text: "I am an Individual", audience: "Individual" },
-  { num: "02", text: "I lead a Sales Team", audience: "Sales Professional" },
+  { num: "01", text: "I am a Leader", audience: "Leader" },
+  { num: "02", text: "I lead an Executive Team", audience: "Executive Team" },
   { num: "03", text: "I run an Organisation", audience: "Organisation" },
-  { num: "04", text: "I represent a Government", audience: "Government" },
+  { num: "04", text: "I lead a Sales Team", audience: "Sales Team" },
+  { num: "05", text: "I represent a Government or Institution", audience: "Government or Institution" },
+  { num: "06", text: "I lead a Business in Growth or Reinvention", audience: "Business in Growth or Reinvention" },
 ];
 
 export function Pathways() {
@@ -25,8 +27,8 @@ export function Pathways() {
   };
 
   return (
-    <section className="bg-cream px-14 py-40 max-md:px-6 max-md:py-25">
-      <div className="max-w-[1280px] mx-auto grid grid-cols-[1fr_1.3fr] gap-30 items-start max-md:grid-cols-1 max-md:gap-12">
+    <section className="bg-cream px-[var(--rail-x)] py-40 max-md:py-25">
+      <div className="grid grid-cols-[1fr_1.3fr] gap-30 items-start max-md:grid-cols-1 max-md:gap-12">
         <div className="sticky top-30 max-md:static">
           <div
             data-mark
@@ -49,21 +51,33 @@ export function Pathways() {
           {PATHWAYS.map((p, i) => (
             <li
               key={p.audience}
-              className={`reveal reveal-delay-${i} ${i === PATHWAYS.length - 1 ? "border-b border-navy/10" : ""}`}
+              data-pathway-row
+              className={i === PATHWAYS.length - 1 ? "border-b border-navy/10" : ""}
             >
               <button
                 type="button"
                 onClick={onClick(p.audience)}
-                className="group relative w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-9 border-t border-navy/10 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
+                className="group relative w-full grid grid-cols-[60px_1fr_auto] gap-8 items-center py-8 cursor-pointer transition-transform duration-500 ease-smooth will-change-transform hover:translate-x-4 text-left bg-transparent max-md:grid-cols-[40px_1fr_24px] max-md:gap-4 max-md:py-6"
               >
+                <span
+                  aria-hidden="true"
+                  data-pathway-rule
+                  className="absolute top-0 left-0 right-0 h-px bg-navy/10"
+                />
                 <span
                   aria-hidden="true"
                   className="absolute -top-px left-0 right-0 h-px bg-gold origin-left scale-x-0 transition-transform duration-700 ease-smooth group-hover:scale-x-100"
                 />
-                <span className="font-serif italic text-charcoal-soft text-[16px] transition-transform duration-500 ease-smooth group-hover:translate-x-2">
+                <span
+                  data-pathway-content
+                  className="font-serif italic text-charcoal-soft text-[16px] transition-transform duration-500 ease-smooth group-hover:translate-x-2"
+                >
                   {p.num}
                 </span>
-                <span className="font-serif font-normal text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3]">
+                <span
+                  data-pathway-content
+                  className="font-serif font-normal text-navy text-[clamp(22px,2.4vw,32px)] leading-[1.3]"
+                >
                   {p.text}
                 </span>
                 <span

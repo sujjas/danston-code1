@@ -6,10 +6,10 @@ const SEGMENTS: { text: string; gold?: boolean }[] = [
   { text: "Across " },
   { text: "30+", gold: true },
   { text: " years and " },
-  { text: "four", gold: true },
-  { text: " continents, advising " },
+  { text: "five", gold: true },
+  { text: " regions — Africa, Europe, Asia, the Middle East, and the United States — advising " },
   { text: "three", gold: true },
-  { text: " governments, building multimillion-dollar businesses — published in " },
+  { text: " governments, building multimillion-dollar businesses, published in " },
   { text: "two", gold: true },
   { text: " books." },
 ];
@@ -76,8 +76,8 @@ export function CredibilitySentence() {
   const span = REVEAL_END - REVEAL_START;
 
   return (
-    <section className="bg-navy text-cream px-14 py-45 overflow-hidden max-md:px-6 max-md:py-25">
-      <div className="max-w-[1180px] mx-auto">
+    <section className="bg-navy text-cream px-[var(--rail-x)] py-45 overflow-hidden max-md:py-25">
+      <div>
         <div
           data-mark
           className="reveal font-sans text-cream/55 text-[11px] tracking-[3px] uppercase mb-12 before:inline-block before:align-middle before:w-8 before:h-px before:bg-cream/30 before:mr-4"
